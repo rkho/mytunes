@@ -1,0 +1,28 @@
+// COLLECTIONS //
+Collections are groups of Song Models.
+
+SongQueue
+  * A queue of songs we are holding for future playback. Songs in the queue will play in a first-in, first-out manner.
+  * If a song is added to a queue, one of the following happens:
+    + If it is the ONLY song in the queue, it will automatically play.
+    + If there are MORE songs in the queue, nothing will happen.
+  * If a song in the queue finishes playing, one of the following will happen:
+    + The next song in the queue is played.
+    + If there are no further songs in the queue, the music comes to an end.
+
+Songs
+  * A collection of song names.
+
+// MODELS //
+Models are containers of 'truth' data.
+
+AppModel
+  * Contains the means to play a song as well as enqueue one.
+  * When a song is played, it is set to the "currentSong", which is then displayed in the AppView.
+  * All songs get enqueued at one point.
+
+SongModel
+  * Contains data for song name/artist/URL/etc.
+  * Also contains triggers for when songs are clicked/played/enqueued/dequeued, etc.
+    + The triggers don't explicitly do anything, they refer to other events that Views are listening for.
+
