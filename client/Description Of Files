@@ -26,3 +26,36 @@ SongModel
   * Also contains triggers for when songs are clicked/played/enqueued/dequeued, etc.
     + The triggers don't explicitly do anything, they refer to other events that Views are listening for.
 
+// VIEWS //
+
+AppView
+  * View for AppModel
+  * Sets up all the other different views:
+    + PlayerView
+    + LibraryView
+    + SongQueueView
+  * Renders these views
+  * Also tells the PlayerView to change the song currently being played when it detects a change in song from the AppModel.
+
+LibraryEntryView
+  * Sub-View for LibraryView
+  * Provides a template for rendering list of library songs to the DOM.
+  * Has an event listener for when songs are clicked. If they are, they will fire off a method belonging to that specific model instance. Right now, it's set to enqueue.
+
+LibraryView
+  * Assembles the table for our list of songs in the library.
+  * List of songs is rendered through LibraryEntryView.
+
+PlayerView
+  * Is activated by AppView.
+  * Takes in a song, plays the song.
+
+SongQueueEntryView
+  * Sub-View for SongQueueView
+  * Like LibraryEntryView, provides a template for rendering list of queued songs to the DOM.
+  * Event listener may be needed to dequeue a song here.
+
+SongQueueView
+  * Like LibraryView, assembles all our SongQueue entries.
+  * Renders the song queue through SongQueueEntryView.
+

@@ -2,10 +2,16 @@
 var SongQueue = Songs.extend({
 
   initialize: function(){
+    this.on('change', function(){
+      playFirst();
+    });
   },
 
   playFirst: function(){
-    return this.length === 1 ? true : false;
+    var model = this[0];
+    if (this.length === 1){
+      model.play();
+    }
   }
 
 });
