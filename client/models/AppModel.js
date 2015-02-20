@@ -13,14 +13,35 @@ var AppModel = Backbone.Model.extend({
     getting called from the window (unless we override it, as we do here). */
 
 
+
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);
 
     params.library.on('enqueue', function(song){
-      this.get('songQueue').push(song);
+      this.set(song, {cid: ('c' + Math.floor(Math.random() * 10)) });
+      this.get('songQueue').add(song, {merge: true});
+      this.get('songQueue').playFirst();
     }, this);
+
+    params.library.on('dequeue', function(song){
+      var songArr = this.get('songQueue').models;
+
+      this.get('songQueue').remove(song);
+      console.log(this.get('songQueue').models);
+      if (songArr.length === 0){
+        this.set('currentSong', null);
+      }
+      else {
+        songArr[0].play()
+      }
+    }, this)
+
+    this.get('songQueue').on('change', function(song){
+      console.log('recognized a change!')
+    }, this)
   }
+
 
 
 });
